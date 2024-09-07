@@ -13,14 +13,11 @@ export async function getUser(req, res) {
 }
 
 export async function getUsers(req, res) {
-    console.log('user.controller - getUsers');
-    
     try {
         const filterBy = {
             txt: req.query?.txt || '',
         }
         const users = await userService.query(filterBy)
-        console.log('user.controller - getUsers - query-users:', users);
         res.send(users)
     } catch (err) {
         logger.error('Failed to get users', err)

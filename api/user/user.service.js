@@ -15,13 +15,10 @@ export const userService = {
 const USER_COLLECTION_NAME = 'user'
 
 async function query(filterBy = {}) {
-    console.log('user.service - query', filterBy);
     const criteria = _buildCriteria(filterBy)
     try {
         const collection = await dbService.getCollection(USER_COLLECTION_NAME)
-        console.log('user.service - query-collection', collection);
         var users = await collection.find(criteria).toArray()
-        console.log('user.service - query-collection-find users', users);
         users = users.map((user) => {
             delete user.password
             user.createdAt = user._id.getTimestamp()
